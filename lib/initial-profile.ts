@@ -9,24 +9,24 @@ export const initialProfile = async () => {
     return redirectToSignIn();
   }
 
-  const profile = await db.profile.findUniqueOrThrow({
+  const profile = await db.profile.findFirst({
     where: {
-      userId: user.id,
+      userId: user.id
     }
   });
 
-  if(profile) {
+  if (profile) {
     return profile;
   }
 
   const newProfile = await db.profile.create({
     data: {
-        userId: user.id,
-        name: `${user.firstName} ${user.lastName}`,
-        imageUrl: user.imageUrl,
-        email: user.emailAddresses[0].emailAddress,
-        },
-    });
+      userId: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      imageUrl: user.imageUrl,
+      email: user.emailAddresses[0].emailAddress
+    }
+  });
 
-    return newProfile;
+  return newProfile;
 };

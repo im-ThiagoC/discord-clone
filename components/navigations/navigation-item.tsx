@@ -42,10 +42,11 @@ export const NavigationItem = ({ name, imageUrl, id }: NavigationItemProps) => {
 
                     <Image
                         src={imageUrl}
-                        alt="Channel"
-                        layout="fill"
-                        objectFit="cover"
-                    />
+                        alt={name}
+                        style={{objectFit: "cover"}}
+                        fill={true}
+                        sizes="48px"
+                    ></Image>
                 </div>   
             </button>
         </ActionTooltip>

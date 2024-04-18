@@ -1,10 +1,10 @@
 "use client"
 
-import { Endpoint } from "next/dist/build/swc"
 import { UploadDropzone } from "@/lib/uploadthing"
 import "@uploadthing/react/styles.css"
-import { X } from "lucide-react"
 import Image from "next/image"
+
+import { X } from "lucide-react"
 
 interface FileUploadProps {
     onChange: (url?: string) => void;
@@ -25,10 +25,11 @@ export const FileUpload = ({
             <div className="relative h-20 w-20">
                 <Image
                     src={value}
-                    layout="fill"
-                    objectFit="cover"
                     alt="Upload"
-                    className="rounded-full"
+                    style={{ objectFit: "cover" }}
+                    width={96}
+                    height={96}
+                    className="rounded-full w-full h-full"
                 />
                 <button onClick={() => onChange()}
                     className="bg-rose-500 text-white rounded-full p-1 absolute top-0 right-0 shadow-sm"

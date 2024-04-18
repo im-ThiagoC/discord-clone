@@ -98,12 +98,11 @@ export const EditServerModal = () => {
                 <DialogHeader className="pt-8 px-6">
 
                     <DialogTitle className=" text 2xl text-center font-bold">
-                        Customize your server!
+                        Customize seu servidor!
                     </DialogTitle>
 
                     <DialogDescription className="text-center text-zinc-500">
-                        Give your server a name and upload a photo to make it your own. 
-                        You can always change this later.
+                        Dê ao seu server um novo nome e imagem e transmita a sua personalidade!
                     </DialogDescription>
 
                 </DialogHeader>
@@ -136,7 +135,7 @@ export const EditServerModal = () => {
                                     <FormItem>
                                         <FormLabel className="uppercase text-xs font-bold text-zinc-500
                                         dark: text-secondary/70">
-                                            Server Name
+                                            Nome do Servidor
                                         </FormLabel>
                                         <FormControl>
                                             <Input
@@ -144,7 +143,7 @@ export const EditServerModal = () => {
                                                 className="bg-zinc-300/50 border-0
                                                 focus-visible:ring-0 text-black
                                                 focus-visible:ring-offset-0"
-                                                placeholder="Enter a server name"
+                                                placeholder="Insira o nome do servidor"
                                                 {...field}
                                             />
                                         </FormControl>

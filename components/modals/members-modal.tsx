@@ -130,7 +130,7 @@ export const  MembersModal = () => {
                             <UserAvatar src={member.profile.imageUrl} size="sm" />
                             <div className="flex flex-col gap-y-1">
                                 <div className="text-xs font-semibold flex items-center gap-x-1">
-                                    {member.profile.name}
+                                    {member.profile.name.split(" ")[1] == "null" ? member.profile.name.split(" ")[0] : member.profile.name}
                                     {roleIconMap[member.role]}
                                 </div>
                                 <p className="text-xs text-zinc-500">

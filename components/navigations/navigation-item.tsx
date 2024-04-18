@@ -44,8 +44,9 @@ export const NavigationItem = ({ name, imageUrl, id }: NavigationItemProps) => {
                         src={imageUrl}
                         alt={name}
                         style={{objectFit: "cover"}}
-                        fill={true}
-                        sizes="48px"
+                        width={96}
+                        height={96}
+                        
                     ></Image>
                 </div>   
             </button>

@@ -78,7 +78,7 @@ export const ServerSearch = ({
                 </kbd>
             </button>
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <CommandInput placeholder="Procure todos os canais e membros"/>
+                <CommandInput placeholder="Procure todos os canais e usuários"/>
                 <CommandList>
                     <CommandEmpty>Sem resultados.</CommandEmpty>
                     {data.map(({label, type, data}) => {

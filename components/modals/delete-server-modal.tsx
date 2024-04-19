@@ -20,21 +20,20 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const DeleteServerModal = () => {
-    const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
+    const { isOpen, onClose, type, data } = useModal();
     const isModalOpen = isOpen && type === "deleteServer";
     const { server } = data;
 
     const [isLoading, setIsLoading] = useState(false);
 
     const onClick = async () => {
-        setIsLoading(true);
         try {
+            setIsLoading(true);
             await axios.delete(`/api/servers/${server?.id}`);
 
             onClose();
             router.refresh();
-            router.push("/");
         } catch (error) {
             console.log(error);
         } finally {

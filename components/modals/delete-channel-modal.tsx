@@ -43,8 +43,8 @@ export const DeleteChannelModal = () => {
             await axios.delete(url);
 
             onClose();
+
             router.refresh();
-            router.push(`/servers/${server?.id}`);
 
         } catch (error) {
             console.log(error);
@@ -70,6 +70,7 @@ export const DeleteChannelModal = () => {
                     <div className="flex items-center justify-between w-full">
                         <Button
                             disabled={isLoading}
+                            aria-disabled={isLoading}
                             onClick={onClose}
                             variant="ghost"
                         >
@@ -77,6 +78,7 @@ export const DeleteChannelModal = () => {
                         </Button>
                         <Button 
                             disabled={isLoading}
+                            aria-disabled={isLoading}
                             onClick={onClick}
                             variant="destructive"
                         >

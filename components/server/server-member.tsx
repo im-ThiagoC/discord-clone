@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { cn } from "@/lib/utils";
 import { Member, MemberRole, Profile, Server } from "@prisma/client";
@@ -45,7 +45,7 @@ export const ServerMember = ({
                     params?. channelId === member.id && "text-primary dark:text-zinc-200 dark:group-hover:text-white"
                 )}                
             >
-                {member.profile.name.split(" ")[1] == "null" ? member.profile.name.split(" ")[0] : member.profile.name}
+                {member.profile.name}
             </p>
             {icon}
 

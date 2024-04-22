@@ -5,6 +5,7 @@ import "./globals.css";
 import { ClerkProvider  } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { SocketProvider } from "@/components/providers/socket-provider";
 
 import { cn } from "@/lib/utils";
 
@@ -25,7 +26,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={cn(
           font.className,
-          "bg-white dark:bg-[#313338] text-black dark:text-white transition-colors duration-200  "
+          "bg-white dark:bg-[#313338] text-black dark:text-white transition-colors duration-200"
           )}>
           <ThemeProvider 
             attribute="class"
@@ -33,13 +34,15 @@ export default function RootLayout({
             enableSystem
             storageKey="discord-theme"
           >
-            <ModalProvider />    
-            {children}  
+            <SocketProvider>
+              <ModalProvider />    
+              {children}
+            </SocketProvider>
+              
           </ThemeProvider>
           
         </body>
      </html>
     </ClerkProvider>
-    
   );
 }

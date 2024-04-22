@@ -17,6 +17,6 @@ export const config = {
     
     "/((?!.+\\.[\\w]+$|_next).*)",
     // Re-include any files in the api or trpc folders that might have an extension
-    "/(api|trpc)(.*)"
+    "/(api|trpc)(.*)",
   ]
 };

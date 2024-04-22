@@ -2,21 +2,21 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 interface UserAvatarProps {
-    src?: string;
-    className?: string;
-    size: "sm" | "md" | "lg";
+  src?: string;
+  className?: string;
+  size: "sm" | "md" | "lg";
 }
 
 export const UserAvatar = ({
-    src,
-    className,
+  src,
+  className,
 }: UserAvatarProps) => {
-    return (
-        <Avatar className={cn(
-            "h-7 w-7 md:h-10 md:w-10",
-            className,
-        )}>
-            <AvatarImage src={src} />
-        </Avatar>
-    );
+  return (
+    <Avatar className={cn(
+      "h-7 w-7 md:h-10 md:w-10",
+      className,
+    )}>
+      <AvatarImage src={src} />
+    </Avatar>
+  );
 }

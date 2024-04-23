@@ -17,10 +17,7 @@ import {
     DialogTitle,
     DialogContent,
     DialogDescription,
-    
-    DialogTrigger,
-    DialogClose,
-    
+
     DialogFooter,
 
 } from "@/components/ui/dialog"
@@ -36,8 +33,6 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-
-
 
 const formSchema = z.object({
     name: z.string().min(1, {
@@ -91,12 +86,11 @@ export const InitalModal = () => {
                 <DialogHeader className="pt-8 px-6">
 
                     <DialogTitle className=" text 2xl text-center font-bold">
-                        Customize your server!
+                        Customize seu servidor!
                     </DialogTitle>
 
                     <DialogDescription className="text-center text-zinc-500">
-                        Give your server a name and upload a photo to make it your own. 
-                        You can always change this later.
+                        Dê um nome e uma imagem ao seu servidor e mostre sua vibe.
                     </DialogDescription>
 
                 </DialogHeader>
@@ -129,7 +123,7 @@ export const InitalModal = () => {
                                     <FormItem>
                                         <FormLabel className="uppercase text-xs font-bold text-zinc-500
                                         dark: text-secondary/70">
-                                            Server Name
+                                            Nome do Servidor
                                         </FormLabel>
                                         <FormControl>
                                             <Input
@@ -137,7 +131,7 @@ export const InitalModal = () => {
                                                 className="bg-zinc-300/50 border-0
                                                 focus-visible:ring-0 text-black
                                                 focus-visible:ring-offset-0"
-                                                placeholder="Enter a server name"
+                                                placeholder="Insira o nome do servidor"
                                                 {...field}
                                             />
                                         </FormControl>
@@ -148,7 +142,7 @@ export const InitalModal = () => {
                         </div>
                         <DialogFooter className="px-6 py-4 bg-gray-100">
                             <Button variant="primary" disabled={isLoading}>
-                                Create
+                                Criar
                             </Button>
                         </DialogFooter>
                     </form>

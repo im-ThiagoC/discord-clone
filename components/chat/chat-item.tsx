@@ -23,6 +23,8 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useModal } from "@/hooks/use-modal-store";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface ChatItemProps {
   id: string;
@@ -64,8 +66,18 @@ export const ChatItem = ({
   socketQuery,
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [holdingShift, setHoldingShift] = useState(false);
   const { onOpen } = useModal();
-  const [isDeleting, setIsDeleting] = useState(false);
+  const params = useParams();
+  const router = useRouter();
+
+  const onMemberClick = () => {
+    if(member.id == currentMember.id) {
+      return;
+    }
+
+    router.push(`/server/${params?.serverId}/conversations/${member.id}`)
+  }
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -79,6 +91,49 @@ export const ChatItem = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+
+  //Fast Delete
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.key === "Shift") {
+        setHoldingShift(true);
+      }
+    }
+
+    const handleKeyUp = (event: any) => {
+      if (event.key === "Shift") {
+        setHoldingShift(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    }
+  }, []);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const fastDelete = async ({ apiUrl, query }: { apiUrl: string, query: Record<string, string> }) => {
+    try {
+      setIsDeleting(true);
+      const url = qs.stringifyUrl({
+          url: apiUrl || "",
+          query,
+      });
+
+      await axios.delete(url);
+    } catch (error) {
+        console.log(error);
+    } finally {
+        setIsDeleting(false);
+    }
+  }
+
+  //Fast Delete End 
 
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -224,18 +279,35 @@ export const ChatItem = ({
         <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
           {canEditMessage && (
             <ActionTooltip label="editar">
-              <Edit 
+              <Edit
                 onClick={() => setIsEditing(true)}
                 className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
               />
             </ActionTooltip>
           )}
-          <ActionTooltip label="apagar">
-            <Trash 
-              onClick={() => ({})}
-              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
-            />
-          </ActionTooltip>
+          {holdingShift && !isDeleting && (
+            <ActionTooltip label="Fast Delete">
+              <Trash
+                onClick={() => fastDelete({
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery
+                })}
+                className="cursor-pointer ml-auto w-4 h-4 text-red-500 hover:text-red-600 dark:hover:text-red-300 transition"
+              />  
+            </ActionTooltip>
+          )}
+          {!holdingShift && !isDeleting && (
+            <ActionTooltip label="Apagar">
+              <Trash 
+                onClick={() => onOpen("deleteMessage", { 
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery
+                })}
+                className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+              />
+           </ActionTooltip>
+          )}
+          
         </div>
       )}
     </div>

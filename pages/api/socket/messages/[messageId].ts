@@ -18,7 +18,11 @@ export default async function handler(
     const profile = await currentProfilePages(req);
     const { messageId, serverId, channelId } = req.query;
     const { content } = req.body;
-
+    console.log("Channel ID", channelId);
+    console.log("Message ID", messageId);
+    console.log("Server ID", serverId);
+    console.log("Content", content);
+    console.log("Profile", profile);
     if(!profile){
       return res.status(401).json({ error: "Sem autorização, sem perfil" })
     }
@@ -95,7 +99,7 @@ export default async function handler(
     if(req.method === "DELETE"){
       message = await db.message.update({
         where: {
-          id: message.id as string
+          id: messageId as string
         },
         data: {
           fileUrl: null,
@@ -114,10 +118,8 @@ export default async function handler(
 
     if(req.method === "PATCH"){
       if(!isMessageOwner){
-        console.log(message.memberId, member.id)
         return res.status(401).json({ error: "Sem permissão" });
       }
-      console.log(profile.id, serverId, channelId, messageId, content)
       message = await db.message.update({
         where: {
           id: messageId as string,

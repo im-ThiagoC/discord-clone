@@ -23,7 +23,7 @@ export async function GET(
       return new NextResponse("ID de Canal não encontrado!", {status: 400});
     }
 
-    let messages: Message[] = []
+    let messages: Message[] = [];
     
     if(cursor) {
       messages = await db.message.findMany({
@@ -76,7 +76,7 @@ export async function GET(
       nextCursor
     });
   } catch (error) {
-    console.error("[MESSAGES_GET]", error);
+    console.log("[MESSAGES_GET]", error);
     return new NextResponse("Erro ao carregar mensagens!", {status: 500});
   }
 }

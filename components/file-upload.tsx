@@ -40,6 +40,7 @@ export const FileUpload = ({
       </div>
     );
   }
+
   if(value && fileType === "pdf") {
     return (
       <div className="relative flex items-center p-2 mt-2 rounded-md bg-background/10">
@@ -62,6 +63,7 @@ export const FileUpload = ({
       </div>
     )
   }
+  
   return (
     <UploadDropzone
       endpoint={endpoint}

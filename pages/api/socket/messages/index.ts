@@ -1,7 +1,7 @@
 import { currentProfilePages } from "@/lib/current-profile-pages";
 import { db } from "@/lib/db";
 import { NextApiResponseServerIo } from "@/types";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 
 export default async function handler (
   req: NextApiRequest,
@@ -61,10 +61,10 @@ export default async function handler (
       return res.status(404).json({ message: 'Canal não encontrado!'});
     }
 
-    const member = server.members.find(member => member.profileId === profile.id);
+    const member = server.members.find((member) => member.profileId === profile.id);
 
     if(!member){
-      return res.status(404).json({ message: 'Você não é membro deste servidor!'});
+      return res.status(404).json({ message: 'Membro não encontrado!'});
     }
 
     const message = await db.message.create({
@@ -72,8 +72,8 @@ export default async function handler (
         content,
         fileUrl,
         fileName,
-        memberId: member.id as string,
-        channelId: channel.id as string
+        channelId: channelId as string,
+        memberId: member.id
       },
       include: {
         member: {
@@ -90,7 +90,7 @@ export default async function handler (
 
     return res.status(200).json(message);
   } catch (error) {
-    console.error("[MESSAGES_POST]", error);
-    res.status(500).json({ message: 'Erro ao enviar mensagem!' });
+    console.log("[MESSAGES_POST]", error);
+    return res.status(500).json({ message: 'Erro ao enviar mensagem!' });
   }
 }

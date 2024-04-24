@@ -22,6 +22,7 @@ import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface ChatItemProps {
   id: string;
@@ -46,7 +47,7 @@ const roleIconMap = {
 }
 
 const formSchema = z.object({
-  content: z.string().min(1).max(500)
+  content: z.string().min(1)
 })
 
 export const ChatItem = ({
@@ -63,6 +64,7 @@ export const ChatItem = ({
   socketQuery,
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const { onOpen } = useModal();
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -96,6 +98,9 @@ export const ChatItem = ({
       })
 
       await axios.patch(url, values);
+
+      form.reset();
+      setIsEditing(false);
     } catch (error) {
       console.log(error);
     }

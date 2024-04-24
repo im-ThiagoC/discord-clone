@@ -23,7 +23,7 @@ interface ChatMessagesProps {
   chatId: string;
   apiUrl: string;
   socketUrl: string;
-  socketQuery: Record<string, any>;
+  socketQuery: Record<string, string>;
   paramKey: "channelId" | "conversationId";
   paramValue: string;
   type: "channel" | "conversation";
@@ -41,7 +41,7 @@ export const ChatMessages = ({
   type,
 }:ChatMessagesProps) => {
   const queryKey = `chat:${chatId}`;
-
+  
   const {
     data,
     fetchNextPage,
@@ -54,8 +54,8 @@ export const ChatMessages = ({
     paramKey,
     paramValue,
   });
-
-  if(status === "pending") {
+  
+  if(status === "loading") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
         <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
@@ -90,9 +90,9 @@ export const ChatMessages = ({
           <Fragment key={i}>
             {group.items.map((message: MessageWithMemberWithProfile) => (
               <ChatItem 
-                currentMember={member}
                 key={message.id}
                 id={message.id}
+                currentMember={member}
                 content={message.content}
                 member={message.member}
                 timestamp={format(new Date(message.createdAt), DATE_FORMAT)}

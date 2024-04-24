@@ -171,6 +171,7 @@ model DirectMessage {
   content String @db.Text
   //Optional
   fileUrl String? @db.Text
+  fileName String? @db.Text
 
   //Member
   memberId String

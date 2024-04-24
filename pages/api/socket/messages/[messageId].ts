@@ -18,11 +18,6 @@ export default async function handler(
     const profile = await currentProfilePages(req);
     const { messageId, serverId, channelId } = req.query;
     const { content } = req.body;
-    console.log("Channel ID", channelId);
-    console.log("Message ID", messageId);
-    console.log("Server ID", serverId);
-    console.log("Content", content);
-    console.log("Profile", profile);
     if(!profile){
       return res.status(401).json({ error: "Sem autorização, sem perfil" })
     }
@@ -138,9 +133,8 @@ export default async function handler(
     }
 
     const updateKey = `chat:${channelId}:messages:update`;
-
+    console.log(updateKey)
     res?.socket?.server?.io?.emit(updateKey, message);
-    
     return res.status(200).json(message);
   } catch (error) {
     console.log("[MESSAGE_ID]", error);

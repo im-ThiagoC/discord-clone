@@ -3,12 +3,20 @@ import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { NextResponse } from "next/server";
 
+// Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const channels = await fetch('https://.../channels').then((res) => res.json())
-
-  return channels.map((channel: any) => ({
-    slug: channel.slug,
+  const posts = await fetch('https://.../posts').then((res) => res.json())
+ 
+  return posts.map((post:any) => ({
+    slug: post.slug,
   }))
+}
+ 
+// Multiple versions of this page will be statically generated
+// using the `params` returned by `generateStaticParams`
+export default function Page({ params }: { params: { slug: string } }) {
+  const { slug } = params
+  // ...
 }
 
 export async function DELETE(

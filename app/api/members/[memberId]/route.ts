@@ -2,6 +2,14 @@ import { currentProfile } from "@/lib/current-profile"
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
+export async function generateStaticParams() {
+  const members = await fetch('https://.../members').then((res) => res.json())
+
+  return members.map((member: any) => ({
+    slug: member.slug,
+  }))
+}
+
 export async function DELETE(
     req: Request,
     { params }: { params: { memberId: string } }

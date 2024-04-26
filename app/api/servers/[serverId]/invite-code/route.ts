@@ -3,14 +3,6 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server"
 import { v4 as uuidv4 } from "uuid"
 
-export async function generateStaticParams() {
-    const posts = await fetch('https://.../servers/invite-code').then((res) => res.json())
-   
-    return posts.map((post:any) => ({
-      slug: post.slug,
-    }))
-  }
-
 export async function PATCH(
     req: Request,
     { params }: { params: { serverId: string } }

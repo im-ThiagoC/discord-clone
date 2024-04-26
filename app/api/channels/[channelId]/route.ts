@@ -4,6 +4,14 @@ import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { NextResponse } from "next/server";
 
+export async function generateStaticParams() {
+    const channels = await fetch('https://.../channels').then((res) => res.json())
+   
+    return channels.map((channel: any) => ({
+      slug: channel.slug,
+    }))
+  }
+
 export async function DELETE(
     req: Request,
     { params }: { params: {channelId: string}}

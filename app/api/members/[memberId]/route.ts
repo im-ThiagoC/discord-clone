@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch('https://.../members').then((res) => res.json())
  
   return posts.map((post:any) => ({
     slug: post.slug,

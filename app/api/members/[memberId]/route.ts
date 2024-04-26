@@ -10,13 +10,6 @@ export async function generateStaticParams() {
     slug: post.slug,
   }))
 }
- 
-// Multiple versions of this page will be statically generated
-// using the `params` returned by `generateStaticParams`
-export default function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params
-  // ...
-}
 
 export async function DELETE(
   req: Request,

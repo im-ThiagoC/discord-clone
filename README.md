@@ -1,6 +1,6 @@
 # Discord Clone Fullstack
 
-<!-- Espaço reservado para imagem da página inicial -->
+![Main Page](images/main-page.png)
 
 ## Table of Contents
 

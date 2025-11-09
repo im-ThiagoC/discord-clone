@@ -9,7 +9,6 @@ import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChannelType } from "@prisma/client";
 import { MediaRoom } from "@/components/media-room";
 
-
 interface ChannelIdPageProps {
   params: {
     serverId: string;
@@ -17,9 +16,7 @@ interface ChannelIdPageProps {
   };
 }
 
-const ChannelIdPage = async ({
-  params
-}:ChannelIdPageProps) => {
+const ChannelIdPage = async ({ params }:ChannelIdPageProps) => {
   const profile = await currentProfile();
 
   if(!profile){
@@ -28,6 +25,7 @@ const ChannelIdPage = async ({
 
   const channel = await db.channel.findUnique({
     where: {
+      serverId: params.serverId,
       id: params.channelId,
     }
   });

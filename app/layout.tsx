@@ -13,15 +13,11 @@ import { cn } from "@/lib/utils";
 const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Team Chat Application",
-  description: "A Discord Clone in Next.js",
+  title: "Team Chat Management",
+  description: "Application for team communication and collaboration.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode; }) {
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
